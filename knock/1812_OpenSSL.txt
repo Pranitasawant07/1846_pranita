@@ -1,0 +1,69 @@
+mkdir alice
+mkdir bob
+
+------ Confidentiality: ------
+
+cd alice
+1) openssl rand 128 > symm.key
+
+2) cat > plain.txt
+meeting at 2am, Dont get followed
+
+3) openssl enc -in plain.txt -out cipher.txt -e -aes-128-cbc -kfile symm.key
+
+4) openssl genrsa -out alicepriv.key 2048
+
+5) openssl rsa -in alicepriv.key -pubout -out alicepub.key
+
+cd ../bob
+6) openssl genrsa -out bobpriv.key 2048
+   openssl rsa -in bobpriv.key -pubout -out bobpub.key
+
+cd ../alice
+7) cp cipher.txt ../bob
+
+8) openssl rsautl -encrypt -pubin -inkey ../bob/bobpub.key -in symm.key -out symm.enc.key
+
+cd ../bob
+9) openssl rsautl -decrypt -inkey bobpriv.key -in ../alice/symm.enc.key -out symm.dec.key
+
+10) openssl enc -in cipher.txt -out cipher.dec.txt -d -aes-128-cbc -kfile symm.dec.key
+
+
+
+------ Integerity Check: ------
+
+11) openssl dgst -sha512 -out hash.txt -hex plain.txt
+    openssl dgst -sha512 -sign alicepriv.key -out alicesign.sign plain.txt
+
+12) openssl dgst -verify alicepub.key -sha512 -signature alicesign.sign -hex plain.txt
+    
+
+13) openssl dgst -verify alicepub.key -sha512 -signature alicesign.sign -hex plain.txt
+
+
+
+------ Authntication Check ------
+
+14) openssl dgst -hmac -sha512 -out hash.mac -hex plain.txt
+    openssl dgst -sha512 -sign alicepriv.key -out alicemacsign.sign plain.txt
+
+15) openssl dgst -sha512 -verify alicepub.key -signature alicemacsign.sign plain.txt
+
+making some changes to plain.txt
+16) openssl dgst -sha512 -verify alicepub.key -signature alicemacsign.sign plain.txt
+
+
+
+
+------ Digital Signature ------
+
+17) openssl dgst -sha512 -sign alicepriv.key -out hash.sign plain.txt
+
+18) cp plain.txt hash.sign ../bob/
+
+cd ../bob
+19) openssl dgst -sha512 -verify ../alice/alicepub.key -signature hash.sign plain.txt
+
+making some changes to plain.txt
+20) openssl dgst -sha512 -verify ../alice/alicepub.key -signature hash.sign plain.txt

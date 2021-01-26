@@ -1,0 +1,318 @@
+[root@localhost ~]# rpm -ql squid |less
+[root@localhost ~]# rpm -qi squid
+Name        : squid
+Epoch       : 7
+Version     : 3.5.10
+Release     : 4.fc23
+Architecture: x86_64
+Install Date: Tuesday 17 July 2018 11:39:33 AM IST
+Group       : System Environment/Daemons
+Size        : 10996539
+License     : GPLv2+ and (LGPLv2+ and MIT and BSD and Public Domain)
+Signature   : RSA/SHA256, Thursday 12 May 2016 12:04:09 AM IST, Key ID 32474cf834ec9cba
+Source RPM  : squid-3.5.10-4.fc23.src.rpm
+Build Date  : Tuesday 10 May 2016 10:49:00 PM IST
+Build Host  : buildvm-22.phx2.fedoraproject.org
+Relocations : (not relocatable)
+Packager    : Fedora Project
+Vendor      : Fedora Project
+URL         : http://www.squid-cache.org
+Summary     : The Squid proxy caching server
+Description :
+Squid is a high-performance proxy caching server for Web clients,
+supporting FTP, gopher, and HTTP data objects. Unlike traditional
+caching software, Squid handles all requests in a single,
+non-blocking, I/O-driven process. Squid keeps meta data and especially
+hot objects cached in RAM, caches DNS lookups, supports non-blocking
+DNS lookups, and implements negative caching of failed requests.
+
+Squid consists of a main server program squid, a Domain Name System
+lookup program (dnsserver), a program for retrieving FTP data
+(ftpget), and some management and client tools.
+[root@localhost ~]# yum remove squid
+Redirecting to '/usr/bin/dnf remove squid' (see 'man yum2dnf')
+
+Dependencies resolved.
+================================================================================
+ Package                     Arch       Version              Repository    Size
+================================================================================
+Removing:
+ libecap                     x86_64     1.0.0-3.fc23         @fedora       45 k
+ perl-Crypt-OpenSSL-X509     x86_64     1.806-3.fc23         @fedora       77 k
+ perl-DBI                    x86_64     1.633-6.fc23         @fedora      1.8 M
+ perl-Digest                 noarch     1.17-347.fc23        @updates      26 k
+ perl-Digest-MD5             x86_64     2.55-1.fc23          @updates      55 k
+ perl-IO-Socket-IP           noarch     0.37-347.fc23        @fedora       96 k
+ perl-Math-BigInt            noarch     1.9997-355.fc23      @updates     422 k
+ perl-libnet                 noarch     3.08-2.fc23          @updates     283 k
+ squid                       x86_64     7:3.5.10-4.fc23      @updates      10 M
+
+Transaction Summary
+================================================================================
+Remove  9 Packages
+
+Installed size: 13 M
+Is this ok [y/N]: y
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Erasing     : squid-7:3.5.10-4.fc23.x86_64                                1/9 
+  Erasing     : perl-libnet-3.08-2.fc23.noarch                              2/9 
+  Erasing     : perl-DBI-1.633-6.fc23.x86_64                                3/9 
+  Erasing     : perl-Digest-MD5-2.55-1.fc23.x86_64                          4/9 
+  Erasing     : perl-Digest-1.17-347.fc23.noarch                            5/9 
+  Erasing     : perl-Math-BigInt-1.9997-355.fc23.noarch                     6/9 
+  Erasing     : perl-IO-Socket-IP-0.37-347.fc23.noarch                      7/9 
+  Erasing     : libecap-1.0.0-3.fc23.x86_64                                 8/9 
+  Erasing     : perl-Crypt-OpenSSL-X509-1.806-3.fc23.x86_64                 9/9 
+  Verifying   : perl-Digest-1.17-347.fc23.noarch                            1/9 
+  Verifying   : perl-Digest-MD5-2.55-1.fc23.x86_64                          2/9 
+  Verifying   : perl-IO-Socket-IP-0.37-347.fc23.noarch                      3/9 
+  Verifying   : perl-Math-BigInt-1.9997-355.fc23.noarch                     4/9 
+  Verifying   : squid-7:3.5.10-4.fc23.x86_64                                5/9 
+  Verifying   : libecap-1.0.0-3.fc23.x86_64                                 6/9 
+  Verifying   : perl-Crypt-OpenSSL-X509-1.806-3.fc23.x86_64                 7/9 
+  Verifying   : perl-DBI-1.633-6.fc23.x86_64                                8/9 
+  Verifying   : perl-libnet-3.08-2.fc23.noarch                              9/9 
+
+Removed:
+  libecap.x86_64 1.0.0-3.fc23                                                   
+  perl-Crypt-OpenSSL-X509.x86_64 1.806-3.fc23                                   
+  perl-DBI.x86_64 1.633-6.fc23                                                  
+  perl-Digest.noarch 1.17-347.fc23                                              
+  perl-Digest-MD5.x86_64 2.55-1.fc23                                            
+  perl-IO-Socket-IP.noarch 0.37-347.fc23                                        
+  perl-Math-BigInt.noarch 1.9997-355.fc23                                       
+  perl-libnet.noarch 3.08-2.fc23                                                
+  squid.x86_64 7:3.5.10-4.fc23                                                  
+
+Complete!
+[root@localhost ~]# yum -y install squid
+Redirecting to '/usr/bin/dnf -y install squid' (see 'man yum2dnf')
+
+Last metadata expiration check: 0:34:17 ago on Mon Jul  8 11:42:41 2019.
+Dependencies resolved.
+================================================================================
+ Package                     Arch       Version               Repository   Size
+================================================================================
+Installing:
+ libecap                     x86_64     1.0.0-3.fc23          fedora       25 k
+ perl-Crypt-OpenSSL-X509     x86_64     1.806-3.fc23          fedora       40 k
+ perl-DBI                    x86_64     1.633-6.fc23          fedora      727 k
+ perl-Digest                 noarch     1.17-347.fc23         updates      26 k
+ perl-Digest-MD5             x86_64     2.55-1.fc23           updates      35 k
+ perl-IO-Socket-IP           noarch     0.37-347.fc23         fedora       45 k
+ perl-Math-BigInt            noarch     1.9997-355.fc23       updates     188 k
+ perl-libnet                 noarch     3.08-2.fc23           updates     126 k
+ squid                       x86_64     7:3.5.10-4.fc23       updates     3.2 M
+
+Transaction Summary
+================================================================================
+Install  9 Packages
+
+Total download size: 4.4 M
+Installed size: 13 M
+Downloading Packages:
+(1/9): libecap-1.0.0-3.fc23.x86_64.rpm           25 kB/s |  25 kB     00:01    
+(2/9): perl-Crypt-OpenSSL-X509-1.806-3.fc23.x86  36 kB/s |  40 kB     00:01    
+(3/9): perl-Digest-MD5-2.55-1.fc23.x86_64.rpm    97 kB/s |  35 kB     00:00    
+(4/9): perl-libnet-3.08-2.fc23.noarch.rpm       224 kB/s | 126 kB     00:00    
+(5/9): perl-DBI-1.633-6.fc23.x86_64.rpm         498 kB/s | 727 kB     00:01    
+(6/9): perl-Digest-1.17-347.fc23.noarch.rpm     119 kB/s |  26 kB     00:00    
+(7/9): perl-Math-BigInt-1.9997-355.fc23.noarch. 401 kB/s | 188 kB     00:00    
+(8/9): perl-IO-Socket-IP-0.37-347.fc23.noarch.r  34 kB/s |  45 kB     00:01    
+(9/9): squid-3.5.10-4.fc23.x86_64.rpm           678 kB/s | 3.2 MB     00:04    
+--------------------------------------------------------------------------------
+Total                                           641 kB/s | 4.4 MB     00:07     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Installing  : perl-Math-BigInt-1.9997-355.fc23.noarch                     1/9 
+  Installing  : perl-DBI-1.633-6.fc23.x86_64                                2/9 
+  Installing  : perl-Digest-1.17-347.fc23.noarch                            3/9 
+  Installing  : perl-Digest-MD5-2.55-1.fc23.x86_64                          4/9 
+  Installing  : perl-IO-Socket-IP-0.37-347.fc23.noarch                      5/9 
+  Installing  : perl-libnet-3.08-2.fc23.noarch                              6/9 
+  Installing  : perl-Crypt-OpenSSL-X509-1.806-3.fc23.x86_64                 7/9 
+  Installing  : libecap-1.0.0-3.fc23.x86_64                                 8/9 
+  Installing  : squid-7:3.5.10-4.fc23.x86_64                                9/9 
+  Verifying   : squid-7:3.5.10-4.fc23.x86_64                                1/9 
+  Verifying   : libecap-1.0.0-3.fc23.x86_64                                 2/9 
+  Verifying   : perl-Crypt-OpenSSL-X509-1.806-3.fc23.x86_64                 3/9 
+  Verifying   : perl-DBI-1.633-6.fc23.x86_64                                4/9 
+  Verifying   : perl-Digest-MD5-2.55-1.fc23.x86_64                          5/9 
+  Verifying   : perl-libnet-3.08-2.fc23.noarch                              6/9 
+  Verifying   : perl-IO-Socket-IP-0.37-347.fc23.noarch                      7/9 
+  Verifying   : perl-Digest-1.17-347.fc23.noarch                            8/9 
+  Verifying   : perl-Math-BigInt-1.9997-355.fc23.noarch                     9/9 
+
+Installed:
+  libecap.x86_64 1.0.0-3.fc23                                                   
+  perl-Crypt-OpenSSL-X509.x86_64 1.806-3.fc23                                   
+  perl-DBI.x86_64 1.633-6.fc23                                                  
+  perl-Digest.noarch 1.17-347.fc23                                              
+  perl-Digest-MD5.x86_64 2.55-1.fc23                                            
+  perl-IO-Socket-IP.noarch 0.37-347.fc23                                        
+  perl-Math-BigInt.noarch 1.9997-355.fc23                                       
+  perl-libnet.noarch 3.08-2.fc23                                                
+  squid.x86_64 7:3.5.10-4.fc23                                                  
+
+Complete!
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# systemctl status squid
+● squid.service - Squid caching proxy
+   Loaded: loaded (/usr/lib/systemd/system/squid.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+
+Jul 08 11:32:36 localhost.localdomain systemd[1]: squid.service: Unit cannot ...
+Jul 08 11:32:37 localhost.localdomain systemd[1]: squid.service: Unit cannot ...
+Jul 08 11:32:37 localhost.localdomain systemd[1]: squid.service: Unit cannot ...
+Jul 08 12:16:17 localhost.localdomain systemd[1]: Stopped Squid caching proxy.
+Hint: Some lines were ellipsized, use -l to show in full.
+[root@localhost ~]# cd etc/squid/squid.conf
+bash: cd: etc/squid/squid.conf: No such file or directory
+[root@localhost ~]# ls
+anaconda-ks.cfg        currentrules      Downloads                Pictures
+Android                currentRules      localhost                Public
+AndroidStudioProjects  currentrules1515  Music                    Templates
+backup                 Desktop           mypasswd                 Videos
+backup1730             Documents         NEWRULES1515thursdaylab
+[root@localhost ~]#  /etc/squid/squid.conf
+bash: /etc/squid/squid.conf: Permission denied
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# man squid
+[root@localhost ~]# systemctl start squid
+[root@localhost ~]# netstat -tab
+netstat: invalid option -- 'b'
+usage: netstat [-vWeenNcCF] [<Af>] -r         netstat {-V|--version|-h|--help}
+       netstat [-vWnNcaeol] [<Socket> ...]
+       netstat { [-vWeenNac] -I[<Iface>] | [-veenNac] -i | [-cnNe] -M | -s [-6tuw] } [delay]
+
+        -r, --route              display routing table
+        -I, --interfaces=<Iface> display interface table for <Iface>
+        -i, --interfaces         display interface table
+        -g, --groups             display multicast group memberships
+        -s, --statistics         display networking statistics (like SNMP)
+        -M, --masquerade         display masqueraded connections
+
+        -v, --verbose            be verbose
+        -W, --wide               don't truncate IP addresses
+        -n, --numeric            don't resolve names
+        --numeric-hosts          don't resolve host names
+        --numeric-ports          don't resolve port names
+        --numeric-users          don't resolve user names
+        -N, --symbolic           resolve hardware names
+        -e, --extend             display other/more information
+        -p, --programs           display PID/Program name for sockets
+        -o, --timers             display timers
+        -c, --continuous         continuous listing
+
+        -l, --listening          display listening server sockets
+        -a, --all                display all sockets (default: connected)
+        -F, --fib                display Forwarding Information Base (default)
+        -C, --cache              display routing cache instead of FIB
+        -Z, --context            display SELinux security context for sockets
+
+  <Socket>={-t|--tcp} {-u|--udp} {-U|--udplite} {-S|--sctp} {-w|--raw}
+           {-x|--unix} --ax25 --ipx --netrom
+  <AF>=Use '-6|-4' or '-A <af>' or '--<af>'; default: inet
+  List of possible address families (which support routing):
+    inet (DARPA Internet) inet6 (IPv6) ax25 (AMPR AX.25) 
+    netrom (AMPR NET/ROM) ipx (Novell IPX) ddp (Appletalk DDP) 
+    x25 (CCITT X.25) 
+[root@localhost ~]# systemctl status squid
+● squid.service - Squid caching proxy
+   Loaded: loaded (/usr/lib/systemd/system/squid.service; disabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-07-08 12:24:07 IST; 49s ago
+  Process: 3931 ExecStart=/usr/sbin/squid $SQUID_OPTS -f $SQUID_CONF (code=exited, status=0/SUCCESS)
+  Process: 3916 ExecStartPre=/usr/libexec/squid/cache_swap.sh (code=exited, status=0/SUCCESS)
+ Main PID: 3937 (squid)
+   CGroup: /system.slice/squid.service
+           ├─3937 /usr/sbin/squid -f /etc/squid/squid.conf
+           ├─3940 (squid-1) -f /etc/squid/squid.conf
+           └─3953 (logfile-daemon) /var/log/squid/access.log
+
+Jul 08 12:24:07 localhost.localdomain systemd[1]: Starting Squid caching proxy...
+Jul 08 12:24:07 localhost.localdomain squid[3937]: Squid Parent: will start 1 kids
+Jul 08 12:24:07 localhost.localdomain squid[3937]: Squid Parent: (squid-1) process 3940 started
+Jul 08 12:24:07 localhost.localdomain systemd[1]: Started Squid caching proxy.
+[root@localhost ~]# netstat -tap
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 localhost.localdoma:ipp 0.0.0.0:*               LISTEN      1863/cupsd          
+tcp        0      0 localhost.locald:domain 0.0.0.0:*               LISTEN      1098/dnsmasq        
+tcp        0      0 localhost.localdo:54386 ec2-54-229-115-12:https ESTABLISHED 2196/firefox        
+tcp6       0      0 localhost6.localdom:ipp [::]:*                  LISTEN      1863/cupsd          
+tcp6       0      0 [::]:squid              [::]:*                  LISTEN      3940/(squid-1)      
+[root@localhost ~]# netstat -tapn
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      1863/cupsd          
+tcp        0      0 192.168.124.1:53        0.0.0.0:*               LISTEN      1098/dnsmasq        
+tcp        0      0 192.168.2.78:54386      54.229.115.128:443      TIME_WAIT   -                   
+tcp6       0      0 ::1:631                 :::*                    LISTEN      1863/cupsd          
+tcp6       0      0 :::3128                 :::*                    LISTEN      3940/(squid-1)      
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# cd /etc
+[root@localhost etc]# ls
+abrt                cupshelpers                 gdm            kernel                    netconfig          rc5.d              subuid-
+adjtime             dbus-1                      geoclue        krb5.conf                 NetworkManager     rc6.d              sudoers
+aide.conf           dconf                       ghostscript    krb5.conf.d               networks           rc.d               sudoers.d
+aliases             default                     gnupg          ld.so.cache               nfsmount.conf      redhat-release     sysconfig
+alsa                depmod.d                    GREP_COLORS    ld.so.conf                nsswitch.conf      request-key.conf   sysctl.conf
+alternatives        dhcp                        groff          ld.so.conf.d              nsswitch.conf.bak  request-key.d      sysctl.d
+anacrontab          DIR_COLORS                  group          libaudit.conf             openldap           resolv.conf        systemd
+apt                 DIR_COLORS.256color         group-         libblockdev               openvpn            rpc                system-release
+asound.conf         DIR_COLORS.lightbgcolor     grub2.cfg      libibverbs.d              opt                rpm                system-release-cpe
+at.deny             dleyna-server-service.conf  grub2-efi.cfg  libnl                     os-release         rwtab              tcsd.conf
+at-spi2             dnf                         grub.d         libreport                 PackageKit         rwtab.d            terminfo
+audisp              dnsmasq.conf                gshadow        libuser.conf              pam.d              rygel.conf         tmpfiles.d
+audit               dnsmasq.d                   gshadow-       libvirt                   pam_pkcs11         samba              Trolltech.conf
+avahi               dracut.conf                 gss            locale.conf               passwd             sane.d             trusted-key.key
+bash_completion.d   dracut.conf.d               gssproxy       localtime                 passwd-            sasl2              udev
+bashrc              drirc                       hba.conf       login.defs                passwdqc.conf      scl                udisks2
+binfmt.d            e2fsck.conf                 highlight      logrotate.conf            pcmcia             security           unbound
+bluetooth           environment                 host.conf      logrotate.d               pinforc            selinux            updatedb.conf
+brlapi.key          ethertypes                  hostname       lvm                       pkcs11             services           UPower
+brltty              exports                     hosts          machine-id                pki                sestatus.conf      usb_modeswitch.conf
+brltty.conf         exports.d                   hosts.allow    magic                     plymouth           setroubleshoot     usb_modeswitch.d
+chkconfig.d         extlinux.conf               hosts.deny     mailcap                   pm                 setuptool.d        vconsole.conf
+chrony.conf         favicon.png                 hp             makedumpfile.conf.sample  polkit-1           sgml               vdpau_wrapper.cfg
+chrony.keys         fcoe                        httpd          man_db.conf               popt.d             shadow             virc
+chrony.keys.rpmnew  fedora-release              idmapd.conf    maven                     ppp                shadow-            vmware-tools
+cifs-utils          filesystems                 init.d         mcelog                    prelink.conf.d     shells             vpnc
+corosync            firefox                     inittab        memtest86+.conf           printcap           skel               wgetrc
+cron.d              firewalld                   inputrc        mime.types                profile            sos.conf           wpa_supplicant
+cron.daily          fonts                       iproute2       mke2fs.conf               profile.d          speech-dispatcher  wvdial.conf
+cron.deny           foomatic                    iptables.conf  modprobe.d                protocols          squid              X11
+cron.hourly         fprintd.conf                iscsi          modulefiles               pulse              ssh                xattr.conf
+cron.monthly        fstab                       issue          modules-load.d            purple             ssl                xdg
+crontab             fuse.conf                   issue.net      mongod.conf               qemu               sssd               xinetd.d
+cron.weekly         fw_env.config               java           mongos.conf               radvd.conf         statetab           xml
+crypto-policies     fwupd.conf                  john.conf      motd                      rc0.d              statetab.d         yum
+crypttab            gconf                       jvm            mtab                      rc1.d              stunnel            yum.repos.d
+csh.cshrc           gcrypt                      jvm-commmon    mtools.conf               rc2.d              subgid
+csh.login           gdbinit                     jwhois.conf    multipath                 rc3.d              subgid-
+cups                gdbinit.d                   kdump.conf     nanorc                    rc4.d              subuid
+[root@localhost etc]# cd squid
+[root@localhost squid]# ls
+1             cachemgr.conf          mime.conf          passwd      squid.conf]         squid.service]
+aatish        cachemgr.conf.default  mime.conf.default  squid       squid.conf.default  squid.service? vi squid.service
+backupsquid   errorpage.css          pass               squid.com   squid.conf.rpmsave  squid.users
+backupsquid1  errorpage.css.default  passfile           squid.conf  squid.service       thulab
+[root@localhost squid]# nano cachemgr.conf
+cachemgr.conf          cachemgr.conf.default  
+[root@localhost squid]# nano squid.conf
+[root@localhost squid]# nano squid.conf
+[root@localhost squid]# 
+

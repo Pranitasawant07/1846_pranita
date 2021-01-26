@@ -1,0 +1,403 @@
+[student@localhost ~]$ su -
+Password: 
+[root@localhost ~]# systemctl status
+● localhost.localdomain
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Mon 2019-07-01 16:14:00 IST; 4h 36min left
+   CGroup: /
+           ├─1 /usr/lib/systemd/systemd --switched-root --system --deserialize 21
+           ├─user.slice
+           │ ├─user-1000.slice
+           │ │ ├─user@1000.service
+           │ │ │ ├─1427 /usr/lib/systemd/systemd --user
+           │ │ │ └─1434 (sd-pam)                                                          
+           │ │ └─session-1.scope
+           │ │   ├─1420 gdm-session-worker [pam/gdm-password]
+           │ │   ├─1492 /usr/bin/gnome-keyring-daemon --daemonize --login
+           │ │   ├─1530 /usr/libexec/gdm-x-session --run-script gnome-session
+           │ │   ├─1540 /usr/libexec/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -nolisten tcp -background none -noreset -keeptty -verbo
+           │ │   ├─1628 dbus-daemon --print-address 4 --session
+           │ │   ├─1631 /usr/libexec/gnome-session-binary
+           │ │   ├─1674 /usr/libexec/at-spi-bus-launcher
+           │ │   ├─1679 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+           │ │   ├─1683 /usr/libexec/at-spi2-registryd --use-gnome-session
+           │ │   ├─1695 /usr/libexec/gvfsd
+           │ │   ├─1700 /usr/libexec/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+           │ │   ├─1710 /usr/libexec/gnome-settings-daemon
+           │ │   ├─1735 /usr/bin/pulseaudio --start --log-target=syslog
+           │ │   ├─1754 /usr/bin/gnome-shell
+           │ │   ├─1786 /usr/libexec/gsd-printer
+           │ │   ├─1818 /usr/libexec/gnome-shell-calendar-server
+           │ │   ├─1819 ibus-daemon --xim --panel disable
+           │ │   ├─1824 /usr/libexec/ibus-dconf
+           │ │   ├─1826 /usr/libexec/ibus-x11 --kill-daemon
+           │ │   ├─1841 /usr/libexec/dconf-service
+           │ │   ├─1844 /usr/libexec/evolution-source-registry
+           │ │   ├─1859 /usr/libexec/mission-control-5
+           │ │   ├─1867 /usr/libexec/goa-daemon
+[root@localhost ~]# ls
+anaconda-ks.cfg  currentrules  currentrules1515  Documents  localhost  mypasswd                 Pictures  Templates
+backup           currentRules  Desktop           Downloads  Music      NEWRULES1515thursdaylab  Public    Videos
+[root@localhost ~]# cd backup
+-bash: cd: backup: Not a directory
+[root@localhost ~]# ls
+anaconda-ks.cfg  currentrules  currentrules1515  Documents  localhost  mypasswd                 Pictures  Templates
+backup           currentRules  Desktop           Downloads  Music      NEWRULES1515thursdaylab  Public    Videos
+[root@localhost ~]# mkdir backup1730
+[root@localhost ~]# ls
+anaconda-ks.cfg  backup1730    currentRules      Desktop    Downloads  Music     NEWRULES1515thursdaylab  Public     Videos
+backup           currentrules  currentrules1515  Documents  localhost  mypasswd  Pictures                 Templates
+[root@localhost ~]# cd backup1730
+[root@localhost backup1730]# iptables-save>backup
+[root@localhost backup1730]# ls
+backup
+[root@localhost backup1730]# systemctl stop firewalld 
+[root@localhost backup1730]# systemctl status
+● localhost.localdomain
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Mon 2019-07-01 16:14:00 IST; 4h 25min left
+   CGroup: /
+           ├─1 /usr/lib/systemd/systemd --switched-root --system --deserialize 21
+           ├─user.slice
+           │ ├─user-1000.slice
+           │ │ ├─user@1000.service
+           │ │ │ ├─1427 /usr/lib/systemd/systemd --user
+           │ │ │ └─1434 (sd-pam)                                                          
+           │ │ └─session-1.scope
+           │ │   ├─1420 gdm-session-worker [pam/gdm-password]
+           │ │   ├─1492 /usr/bin/gnome-keyring-daemon --daemonize --login
+           │ │   ├─1530 /usr/libexec/gdm-x-session --run-script gnome-session
+           │ │   ├─1540 /usr/libexec/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -nolisten tcp -background none -noreset -keeptty -verbo
+           │ │   ├─1628 dbus-daemon --print-address 4 --session
+           │ │   ├─1631 /usr/libexec/gnome-session-binary
+           │ │   ├─1674 /usr/libexec/at-spi-bus-launcher
+           │ │   ├─1679 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+           │ │   ├─1683 /usr/libexec/at-spi2-registryd --use-gnome-session
+           │ │   ├─1695 /usr/libexec/gvfsd
+           │ │   ├─1700 /usr/libexec/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+           │ │   ├─1710 /usr/libexec/gnome-settings-daemon
+           │ │   ├─1735 /usr/bin/pulseaudio --start --log-target=syslog
+           │ │   ├─1754 /usr/bin/gnome-shell
+           │ │   ├─1786 /usr/libexec/gsd-printer
+           │ │   ├─1818 /usr/libexec/gnome-shell-calendar-server
+           │ │   ├─1819 ibus-daemon --xim --panel disable
+           │ │   ├─1824 /usr/libexec/ibus-dconf
+           │ │   ├─1826 /usr/libexec/ibus-x11 --kill-daemon
+           │ │   ├─1841 /usr/libexec/dconf-service
+           │ │   ├─1844 /usr/libexec/evolution-source-registry
+           │ │   ├─1859 /usr/libexec/mission-control-5
+           │ │   ├─1867 /usr/libexec/goa-daemon
+[root@localhost backup1730]# systemctl stop firewalld 
+[root@localhost backup1730]# systemctl status
+● localhost.localdomain
+    State: running
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Mon 2019-07-01 16:14:00 IST; 4h 24min left
+   CGroup: /
+           ├─1 /usr/lib/systemd/systemd --switched-root --system --deserialize 21
+           ├─user.slice
+           │ ├─user-1000.slice
+           │ │ ├─user@1000.service
+           │ │ │ ├─1427 /usr/lib/systemd/systemd --user
+           │ │ │ └─1434 (sd-pam)                                                          
+           │ │ └─session-1.scope
+           │ │   ├─1420 gdm-session-worker [pam/gdm-password]
+           │ │   ├─1492 /usr/bin/gnome-keyring-daemon --daemonize --login
+           │ │   ├─1530 /usr/libexec/gdm-x-session --run-script gnome-session
+           │ │   ├─1540 /usr/libexec/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -nolisten tcp -background none -noreset -keeptty -verbo
+           │ │   ├─1628 dbus-daemon --print-address 4 --session
+           │ │   ├─1631 /usr/libexec/gnome-session-binary
+           │ │   ├─1674 /usr/libexec/at-spi-bus-launcher
+           │ │   ├─1679 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+           │ │   ├─1683 /usr/libexec/at-spi2-registryd --use-gnome-session
+           │ │   ├─1695 /usr/libexec/gvfsd
+           │ │   ├─1700 /usr/libexec/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+           │ │   ├─1710 /usr/libexec/gnome-settings-daemon
+           │ │   ├─1735 /usr/bin/pulseaudio --start --log-target=syslog
+           │ │   ├─1754 /usr/bin/gnome-shell
+           │ │   ├─1786 /usr/libexec/gsd-printer
+           │ │   ├─1818 /usr/libexec/gnome-shell-calendar-server
+           │ │   ├─1819 ibus-daemon --xim --panel disable
+           │ │   ├─1824 /usr/libexec/ibus-dconf
+           │ │   ├─1826 /usr/libexec/ibus-x11 --kill-daemon
+           │ │   ├─1841 /usr/libexec/dconf-service
+           │ │   ├─1844 /usr/libexec/evolution-source-registry
+           │ │   ├─1859 /usr/libexec/mission-control-5
+           │ │   ├─1867 /usr/libexec/goa-daemon
+[root@localhost backup1730]# systemctl status firewalld 
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)
+   Active: inactive (dead) since Mon 2019-07-01 11:48:23 IST; 1min 15s ago
+     Docs: man:firewalld(1)
+  Process: 793 ExecStart=/usr/sbin/firewalld --nofork --nopid $FIREWALLD_ARGS (code=exited, status=0/SUCCESS)
+ Main PID: 793 (code=exited, status=0/SUCCESS)
+
+Jul 01 10:44:26 localhost.localdomain systemd[1]: Started firewalld - dynamic firewall daemon.
+Jul 01 10:44:35 localhost.localdomain /firewalld[793]: WARNING: FedoraServer: INVALID_SERVICE: cockpit
+Jul 01 11:48:22 localhost.localdomain systemd[1]: Stopping firewalld - dynamic firewall daemon...
+Jul 01 11:48:23 localhost.localdomain systemd[1]: Stopped firewalld - dynamic firewall daemon.
+Jul 01 11:49:19 localhost.localdomain systemd[1]: Stopped firewalld - dynamic firewall daemon.
+[root@localhost backup1730]# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+[root@localhost backup1730]# iptables -L -t nat
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination         
+[root@localhost backup1730]# man iptables
+[root@localhost backup1730]# man iptables
+[root@localhost backup1730]# iptables -P INPUT DROP
+[root@localhost backup1730]# iptables -L 
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+[root@localhost backup1730]# iptables -P OUTPUT DROP
+[root@localhost backup1730]# iptables -L 
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy DROP)
+target     prot opt source               destination         
+[root@localhost backup1730]# iptables -P FORWARD DROP
+[root@localhost backup1730]# iptables -L 
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy DROP)
+target     prot opt source               destination         
+[root@localhost backup1730]# ping google.com
+ping: unknown host google.com
+[root@localhost backup1730]# man iptables
+[root@localhost backup1730]# iptables -A OUTPUT -j ACCEPT
+[root@localhost backup1730]# iptables -L 
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             anywhere            
+[root@localhost backup1730]# man iptables
+[root@localhost backup1730]# man iptables
+[root@localhost backup1730]#  iptables -extention
+iptables v1.4.21: unknown option "iptables"
+Try `iptables -h' or 'iptables --help' for more information.
+[root@localhost backup1730]#  iptables -extensions
+iptables v1.4.21: unknown option "iptables"
+Try `iptables -h' or 'iptables --help' for more information.
+[root@localhost backup1730]#  iptables -extensions
+iptables v1.4.21: unknown option "iptables"
+Try `iptables -h' or 'iptables --help' for more information.
+[root@localhost backup1730]#  iptables --help
+iptables v1.4.21
+
+Usage: iptables -[ACD] chain rule-specification [options]
+       iptables -I chain [rulenum] rule-specification [options]
+       iptables -R chain rulenum rule-specification [options]
+       iptables -D chain rulenum [options]
+       iptables -[LS] [chain [rulenum]] [options]
+       iptables -[FZ] [chain] [options]
+       iptables -[NX] chain
+       iptables -E old-chain-name new-chain-name
+       iptables -P chain target [options]
+       iptables -h (print this help information)
+
+Commands:
+Either long or short options are allowed.
+  --append  -A chain		Append to chain
+  --check   -C chain		Check for the existence of a rule
+  --delete  -D chain		Delete matching rule from chain
+  --delete  -D chain rulenum
+				Delete rule rulenum (1 = first) from chain
+  --insert  -I chain [rulenum]
+				Insert in chain as rulenum (default 1=first)
+  --replace -R chain rulenum
+				Replace rule rulenum (1 = first) in chain
+  --list    -L [chain [rulenum]]
+				List the rules in a chain or all chains
+  --list-rules -S [chain [rulenum]]
+				Print the rules in a chain or all chains
+  --flush   -F [chain]		Delete all rules in  chain or all chains
+  --zero    -Z [chain [rulenum]]
+				Zero counters in chain or all chains
+  --new     -N chain		Create a new user-defined chain
+  --delete-chain
+            -X [chain]		Delete a user-defined chain
+  --policy  -P chain target
+				Change policy on chain to target
+  --rename-chain
+            -E old-chain new-chain
+				Change chain name, (moving any references)
+Options:
+    --ipv4	-4		Nothing (line is ignored by ip6tables-restore)
+    --ipv6	-6		Error (line is ignored by iptables-restore)
+[!] --protocol	-p proto	protocol: by number or name, eg. `tcp'
+[!] --source	-s address[/mask][...]
+				source specification
+[!] --destination -d address[/mask][...]
+				destination specification
+[!] --in-interface -i input name[+]
+				network interface name ([+] for wildcard)
+ --jump	-j target
+				target for rule (may load target extension)
+  --goto      -g chain
+                              jump to chain with no return
+  --match	-m match
+				extended match (may load extension)
+  --numeric	-n		numeric output of addresses and ports
+[!] --out-interface -o output name[+]
+				network interface name ([+] for wildcard)
+  --table	-t table	table to manipulate (default: `filter')
+  --verbose	-v		verbose mode
+  --wait	-w		wait for the xtables lock
+  --line-numbers		print line numbers when listing
+  --exact	-x		expand numbers (display exact values)
+[!] --fragment	-f		match second or further fragments only
+  --modprobe=<command>		try to insert modules using this command
+  --set-counters PKTS BYTES	set the counter during insert/append
+[!] --version	-V		print package version.
+[root@localhost backup1730]#  iptables -extensions
+iptables v1.4.21: unknown option "iptables"
+Try `iptables -h' or 'iptables --help' for more information.
+[root@localhost backup1730]#  iptables -h
+iptables v1.4.21
+
+Usage: iptables -[ACD] chain rule-specification [options]
+       iptables -I chain [rulenum] rule-specification [options]
+       iptables -R chain rulenum rule-specification [options]
+       iptables -D chain rulenum [options]
+       iptables -[LS] [chain [rulenum]] [options]
+       iptables -[FZ] [chain] [options]
+       iptables -[NX] chain
+       iptables -E old-chain-name new-chain-name
+       iptables -P chain target [options]
+       iptables -h (print this help information)
+
+Commands:
+Either long or short options are allowed.
+  --append  -A chain		Append to chain
+  --check   -C chain		Check for the existence of a rule
+  --delete  -D chain		Delete matching rule from chain
+  --delete  -D chain rulenum
+				Delete rule rulenum (1 = first) from chain
+  --insert  -I chain [rulenum]
+				Insert in chain as rulenum (default 1=first)
+  --replace -R chain rulenum
+				Replace rule rulenum (1 = first) in chain
+  --list    -L [chain [rulenum]]
+				List the rules in a chain or all chains
+  --list-rules -S [chain [rulenum]]
+				Print the rules in a chain or all chains
+  --flush   -F [chain]		Delete all rules in  chain or all chains
+  --zero    -Z [chain [rulenum]]
+				Zero counters in chain or all chains
+  --new     -N chain		Create a new user-defined chain
+  --delete-chain
+            -X [chain]		Delete a user-defined chain
+  --policy  -P chain target
+				Change policy on chain to target
+  --rename-chain
+            -E old-chain new-chain
+				Change chain name, (moving any references)
+Options:
+    --ipv4	-4		Nothing (line is ignored by ip6tables-restore)
+    --ipv6	-6		Error (line is ignored by iptables-restore)
+[!] --protocol	-p proto	protocol: by number or name, eg. `tcp'
+[!] --source	-s address[/mask][...]
+				source specification
+[!] --destination -d address[/mask][...]
+				destination specification
+[!] --in-interface -i input name[+]
+				network interface name ([+] for wildcard)
+ --jump	-j target
+				target for rule (may load target extension)
+  --goto      -g chain
+                              jump to chain with no return
+  --match	-m match
+				extended match (may load extension)
+  --numeric	-n		numeric output of addresses and ports
+[!] --out-interface -o output name[+]
+				network interface name ([+] for wildcard)
+  --table	-t table	table to manipulate (default: `filter')
+  --verbose	-v		verbose mode
+  --wait	-w		wait for the xtables lock
+  --line-numbers		print line numbers when listing
+  --exact	-x		expand numbers (display exact values)
+[!] --fragment	-f		match second or further fragments only
+  --modprobe=<command>		try to insert modules using this command
+  --set-counters PKTS BYTES	set the counter during insert/append
+[!] --version	-V		print package version.
+[root@localhost backup1730]#  man iptables -extensions
+No manual entry for -extensions
+[root@localhost backup1730]#  man iptables-extensions
+[root@localhost backup1730]#  man iptables-extensions
+[root@localhost backup1730]# iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+[root@localhost backup1730]# ping google.com
+PING google.com (172.217.167.142) 56(84) bytes of data.
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=1 ttl=54 time=53.9 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=2 ttl=54 time=43.0 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=3 ttl=54 time=31.6 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=4 ttl=54 time=32.3 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=5 ttl=54 time=47.5 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=6 ttl=54 time=34.6 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=7 ttl=54 time=49.5 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=8 ttl=54 time=31.6 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=9 ttl=54 time=33.8 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=10 ttl=54 time=36.4 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=11 ttl=54 time=33.5 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=12 ttl=54 time=46.9 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=13 ttl=54 time=42.1 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=14 ttl=54 time=48.0 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=15 ttl=54 time=31.6 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=16 ttl=54 time=39.1 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=17 ttl=54 time=31.6 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=18 ttl=54 time=31.8 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=19 ttl=54 time=34.9 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=20 ttl=54 time=36.6 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=21 ttl=54 time=31.9 ms
+q64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=22 ttl=54 time=35.2 ms
+
+
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=23 ttl=54 time=33.7 ms
+
+
+
+
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=24 ttl=54 time=31.6 ms
+64 bytes from maa03s26-in-f14.1e100.net (172.217.167.142): icmp_seq=25 ttl=54 time=36.2 ms
+^Z
+[1]+  Stopped                 ping google.com
+[root@localhost backup1730]# iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+

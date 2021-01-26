@@ -1,0 +1,52 @@
+1.openssl rand 128 >sym.key
+
+2.cat > plain.txt
+
+HI, I am Alice.
+
+3.openssl enc -k sym.key -aes-128-cbc -e -in plain.txt -out cipher.txt
+
+4.openssl genrsa -out aliceprive.key 2048
+
+5.openssl rsa -in aliceprive.key -pubout -out alicepub.key
+
+6.openssl genrsa -out bobprive.key 2048
+
+  openssl rsa -in bobprive.key -pubout -out bobpub.key
+
+7. copy using cp cipher.txt ../bob
+
+8.openssl rsautl -encrypt -pubin -inkey ../bob/bobpub.key -in sym.key -out 	 sym.enc.key
+
+9.openssl rsautl -decrypt -inkey bobprive.key -in ../alice/sym.enc.key -out sym.dec.key
+
+10.openssl enc -in cipher.txt -out cipher.dec.txt -d -aes-128-cbc -kfile sym.dec.key
+
+
+
+11.openssl dgst -sha512 -out hash.txt -binary plain.txt
+
+   openssl pkeyutl -sign -in hash.txt -inkey aliceprive.key -pkeyopt digest:sha512 -out alicesign.sign
+
+12.openssl dgst -verify alicepub.key -sha512 -signature alicesign.sign -binary plain.txt
+
+13.openssl dgst -verify alicepub.key -sha512 -signature alicesign.sign -binary plain.txt
+
+14.openssl dgst -hmac -sha512 -out hash.mac -hex plain.txt
+
+   openssl dgst -sha512 -sign aliceprive.key -out alicemacsign.sign plain.txt
+
+15.openssl dgst -sha512 -verify alicepub.key -signature alicemacsign.sign plain.txt
+
+16.openssl dgst -sha512 -verify alicepub.key -signature alicemacsign.sign plain.txt
+
+
+
+17. openssl dgst -sha512 -sign aliceprive.key -out hash.sign plain.txt
+
+18.cp plain.txt hash.sign ../bob
+
+19.openssl dgst -sha512 -verify ../alice/alicepub.key -signature hash.sign plain.txt
+
+20.penssl dgst -sha512 -verify ../alice/alicepub.key -signature hash.sign plain.txt
+

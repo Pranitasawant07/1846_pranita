@@ -1,0 +1,133 @@
+[student@localhost ~]$ su -
+Password: 
+[root@localhost ~]# systemctl stop firewall
+Failed to stop firewall.service: Unit firewall.service not loaded.
+[root@localhost ~]# systemctl stop firewalld
+[root@localhost ~]# systemctl status firewalld
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)
+   Active: inactive (dead) since Tue 2019-07-02 10:24:17 IST; 3min 37s ago
+     Docs: man:firewalld(1)
+  Process: 798 ExecStart=/usr/sbin/firewalld --nofork --nopid $FIREWALLD_ARGS (code=exited, status=0/SUCCESS)
+ Main PID: 798 (code=exited, status=0/SUCCESS)
+
+Jul 02 10:17:14 localhost.localdomain systemd[1]: Starting firewalld - dynami...
+Jul 02 10:17:20 localhost.localdomain systemd[1]: Started firewalld - dynamic...
+Jul 02 10:17:33 localhost.localdomain /firewalld[798]: WARNING: FedoraServer:...
+Jul 02 10:24:16 localhost.localdomain systemd[1]: Stopping firewalld - dynami...
+Jul 02 10:24:17 localhost.localdomain systemd[1]: Stopped firewalld - dynamic...
+Hint: Some lines were ellipsized, use -l to show in full.
+[root@localhost ~]# iptables -P INPUT DROP
+[root@localhost ~]# iptables -P OUTPUT DROP
+[root@localhost ~]# iptables -A  OUTPUT -j ACCEPT
+[root@localhost ~]# iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+[root@localhost ~]# iptables -A OUTPUT -p --drop 80 -j ACCEPT
+iptables v1.4.21: unknown protocol "--drop" specified
+Try `iptables -h' or 'iptables --help' for more information.
+[root@localhost ~]# iptables -A OUTPUT -p --dport 80 -j ACCEPT
+iptables v1.4.21: unknown protocol "--dport" specified
+Try `iptables -h' or 'iptables --help' for more information.
+[root@localhost ~]# iptables -A OUTPUT -p --dport:80 -j ACCEPT
+iptables v1.4.21: unknown protocol "--dport:80" specified
+Try `iptables -h' or 'iptables --help' for more information.
+[root@localhost ~]# man dport
+No manual entry for dport
+[root@localhost ~]# iptables -A OUTPUT -p tcp --dport80 -j ACCEPT
+iptables v1.4.21: unknown option "--dport80"
+Try `iptables -h' or 'iptables --help' for more information.
+[root@localhost ~]# iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT
+[root@localhost ~]# iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# iptables -L
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             anywhere            
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:http
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:https
+[root@localhost ~]# iptables -D OUTPUT  -j ACCEPT
+[root@localhost ~]# iptables -L
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:http
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:https
+[root@localhost ~]# iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT
+[root@localhost ~]# iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
+[root@localhost ~]# ping yahoo.com
+PING yahoo.com (98.137.246.7) 56(84) bytes of data.
+^C
+--- yahoo.com ping statistics ---
+0 packets transmitted, 0 received
+
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# iptables -A OUTPUT -p icmp --icmp-type echo -request -j ACCEPT
+iptables v1.4.21: Ambiguous ICMP type `echo': `echo-reply' or `echo-request'?
+Try `iptables -h' or 'iptables --help' for more information.
+[root@localhost ~]# iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
+[root@localhost ~]# ping yahoo.in
+PING yahoo.in (74.6.136.151) 56(84) bytes of data.
+64 bytes from w2.src1.vip.bf1.yahoo.com (74.6.136.151): icmp_seq=1 ttl=47 time=233 ms
+64 bytes from w2.src1.vip.bf1.yahoo.com (74.6.136.151): icmp_seq=2 ttl=47 time=233 ms
+64 bytes from w2.src1.vip.bf1.yahoo.com (74.6.136.151): icmp_seq=3 ttl=47 time=232 ms
+64 bytes from w2.src1.vip.bf1.yahoo.com (74.6.136.151): icmp_seq=4 ttl=47 time=233 ms
+64 bytes from w2.src1.vip.bf1.yahoo.com (74.6.136.151): icmp_seq=5 ttl=47 time=232 ms
+64 bytes from w2.src1.vip.bf1.yahoo.com (74.6.136.151): icmp_seq=6 ttl=47 time=233 ms
+^C
+--- yahoo.in ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5231ms
+rtt min/avg/max/mdev = 232.836/233.286/233.676/0.659 ms
+[root@localhost ~]# traceroute www.google.com
+traceroute to www.google.com (172.217.27.196), 30 hops max, 60 byte packets
+send: Operation not permitted
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ipconfig
+bash: ipconfig: command not found...
+[root@localhost ~]# ifconfig
+enp3s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.2.78  netmask 255.255.255.255  broadcast 192.168.2.78
+        inet6 fe80::d63d:7eff:fece:766a  prefixlen 64  scopeid 0x20<link>
+        ether d4:3d:7e:ce:76:6a  txqueuelen 1000  (Ethernet)
+        RX packets 55140  bytes 5436781 (5.1 MiB)
+        RX errors 0  dropped 3  overruns 0  frame 0
+        TX packets 1609  bytes 481663 (470.3 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+virbr0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        inet 192.168.124.1  netmask 255.255.255.0  broadcast 192.168.124.255
+        ether 52:54:00:94:a6:5d  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+[root@localhost ~]# iptables -t nat -A POSTROUTING -o ethp1 -j mas
+

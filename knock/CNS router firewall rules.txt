@@ -1,0 +1,34 @@
+
+$ iptables -P FORWARD DROP
+
+LN -> I		allow all traffic
+$ iptables -A FORWARD -i eth0 -o eth1 -j ACCEPT
+
+I  -> LN	allow related traffic
+$ iptables -A FORWARD -i eth1 -o eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+LN -> WS	allow 80, 443 tcp
+$ iptables -A FORWARD -i eth0 -o eth2 -p tcp --dport 80 -j ACCEPT
+$ iptables -A FORWARD -i eth0 -o eth2 -p tcp --dport 443 -j ACCEPT
+
+WS -> LN	allow related traffic
+$ iptables -A FORWARD -i eth2 -o eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+I  -> WS	allow 443 tcp
+$ iptables -A FORWARD -i eth1 -o eth2 -p tcp --dport 443 -j ACCEPT
+
+WS -> I		allow related traffic
+$ iptables -A FORWARD -i eth2 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+------------------
+webserver
+------------------
+
+$ iptables -A INPUT -s 10.0.0.1 -p tcp --dport 80 -j ACCEPT
+$ iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+
+$ iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+
+
+

@@ -1,0 +1,18 @@
+Local net to intenet
+iptables -A FOREWARD -i eth0 -o eth1 -j ACCEPT
+
+Internet to Local Net
+iptables -A FOREWARD -i eth1 -o eth0 -m --state ESTABLISHED,RELATED -j ACCEPT
+
+Local Net to Webserver
+iptables -A FOREWARD -i eth0 -o eth2 -p tcp --dport 80 -j ACCEPT
+iptables -A FOREWARD -i eth0 -o eth2 -p tcp --dport 443 -j ACCEPT
+
+webserver to Local net
+iptables -A FOREWARD -i eth2 -o eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+Internet to webServer
+iptables -A FOREWARD -i eth1 -o eth2 -p tcp --dport 443 -j ACCEPT
+
+Webserver to Internet
+iptables -A FOREWARD -i eth2 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
